@@ -1,0 +1,79 @@
+# Ignore arquivos de build e binários
+[Bb]in/
+[Oo]bj/
+
+# Ignore arquivos de log e banco de dados local
+*.log
+*.sqlite
+*.db
+
+# Ignore arquivos de configuração local
+appsettings.Development.json
+appsettings.Local.json
+
+# Ignore pasta de dependências do .NET
+.nuget/
+packages/
+
+# Ignore arquivos de usuário do Visual Studio
+*.user
+*.suo
+*.userprefs
+
+# Ignore pasta de cache do Visual Studio
+.vs/
+
+# Ignore arquivos de projeto específicos do Visual Studio
+*.csproj.user
+
+# Ignore arquivos de teste
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Ignore arquivos de resharper
+_ReSharper.*
+*.ReSharper
+
+# Ignore pasta de artefatos de build
+artifacts/
+
+# Ignore arquivos de configuração do Docker
+docker-compose.override.yml
+
+# Ignore arquivos de ambiente local
+.env
+.env.local
+
+# Ignore arquivos de cache do dotnet
+.dotnet/
+
+# Ignore arquivos de depuração
+*.pdb
+*.idb
+
+# Ignore arquivos de publicação
+publish/
+
+# Ignore arquivos de análise estática
+*.ruleset
+
+# Ignore arquivos de backup
+*.bak
+
+# Ignore arquivos de cache do Visual Studio Code
+.vscode/
+
+# Ignore arquivos de extensão do Visual Studio
+*.vsix
+
+# Ignore arquivos de cache do Rider
+.idea/
+
+# Ignore arquivos de cache do Azure Functions
+func/
+
+# Ignore arquivos de cache do npm (se houver)
+node_modules/
+
+# Ignore arquivos de cache do yarn (se houver)
+.yarn/
