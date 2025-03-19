@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarberShop.Communication\BarberShop.Communication.csproj" />
+    <ProjectReference Include="..\BarberShop.Domain\BarberShop.Domain.csproj" />
+    <ProjectReference Include="..\BarberShop.Exception\BarberShop.Exception.csproj" />
+  </ItemGroup>
+
 </Project>
