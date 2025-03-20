@@ -1,4 +1,5 @@
 ﻿using BarberShop.Communication.RequestDTO.Billings;
+using BarberShop.Exception;
 using FluentValidation;
 
 namespace BarberShop.Application.UseCases.Billings
@@ -7,10 +8,10 @@ namespace BarberShop.Application.UseCases.Billings
     {
         public RegisterNewBillingValidator()
         {
-            RuleFor(b => b.Title).NotEmpty().WithMessage("Title is required");
-            RuleFor(b => b.Amount).GreaterThan(0).WithMessage("Amount must be greater than 0");
-            RuleFor(b => b.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage("Date must be less than or equal to today");
-            RuleFor(b => b.PaymentType).IsInEnum().WithMessage("Payment type is invalid");
+            RuleFor(b => b.Title).NotEmpty().WithMessage(ResourceErrorMessages.TITLE_REQUIRED);
+            RuleFor(b => b.Amount).GreaterThan(0).WithMessage(ResourceErrorMessages.AMOUNT_MUST_BE_GREATER_THAN_0);
+            RuleFor(b => b.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessages.DATE_MUST_BE_GREATER_OR_EQUAL_TODAY);
+            RuleFor(b => b.PaymentType).IsInEnum().WithMessage(ResourceErrorMessages.DATE_MUST_BE_GREATER_OR_EQUAL_TODAY);
         }
     }
 }

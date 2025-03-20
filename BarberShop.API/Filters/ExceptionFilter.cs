@@ -1,4 +1,5 @@
 ﻿using BarberShop.Communication.ResponseDTO.Errors;
+using BarberShop.Exception;
 using BarberShop.Exception.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -30,7 +31,7 @@ public class ExceptionFilter : IExceptionFilter
     }
     private void ThrowUnknownError(ExceptionContext context)
     {
-        var errorMessages = new ResponseErrorDTO("Unknown Error!");
+        var errorMessages = new ResponseErrorDTO(ResourceErrorMessages.UNKNOWN_ERROR);
 
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Result = new ObjectResult(errorMessages);
