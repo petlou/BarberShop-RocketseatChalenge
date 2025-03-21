@@ -72,9 +72,9 @@ namespace BarberShop.Exception {
         /// <summary>
         ///   Looks up a localized string similar to Date must be less than or equal to today.
         /// </summary>
-        public static string DATE_MUST_BE_GREATER_OR_EQUAL_TODAY {
+        public static string DATE_MUST_BE_IN_PAST {
             get {
-                return ResourceManager.GetString("DATE_MUST_BE_GREATER_OR_EQUAL_TODAY", resourceCulture);
+                return ResourceManager.GetString("DATE_MUST_BE_IN_PAST", resourceCulture);
             }
         }
         

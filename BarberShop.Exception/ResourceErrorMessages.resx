@@ -120,7 +120,7 @@
   <data name="AMOUNT_MUST_BE_GREATER_THAN_0" xml:space="preserve">
     <value>Amount must be greater than 0</value>
   </data>
-  <data name="DATE_MUST_BE_GREATER_OR_EQUAL_TODAY" xml:space="preserve">
+  <data name="DATE_MUST_BE_IN_PAST" xml:space="preserve">
     <value>Date must be less than or equal to today</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID" xml:space="preserve">
