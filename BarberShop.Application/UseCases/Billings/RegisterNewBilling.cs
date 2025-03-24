@@ -2,27 +2,26 @@
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Exception.Exceptions;
 
-namespace BarberShop.Application.UseCases.Billings
+namespace BarberShop.Application.UseCases.Billings;
+
+public class RegisterNewBilling
 {
-    public class RegisterNewBilling
+    public ResponseRegisterBillingDTO Execute(RequestRegisterBillingDTO request)
     {
-        public ResponseRegisterBillingDTO Execute(RequestRegisterBillingDTO request)
+        Validate(request);
+
+        return new ResponseRegisterBillingDTO();
+    }
+
+    private void Validate(RequestRegisterBillingDTO request)
+    {
+        var result = new RegisterNewBillingValidator().Validate(request);
+
+        if(!result.IsValid)
         {
-            Validate(request);
+            var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
 
-            return new ResponseRegisterBillingDTO();
-        }
-
-        private void Validate(RequestRegisterBillingDTO request)
-        {
-            var result = new RegisterNewBillingValidator().Validate(request);
-
-            if(!result.IsValid)
-            {
-                var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
-
-                throw new ErrorOnValidationException(errorMessages);
-            }
+            throw new ErrorOnValidationException(errorMessages);
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace BarberShop.Communication.Enums
+﻿namespace BarberShop.Communication.Enums;
+
+public enum PaymentTypeEnum
 {
-    public enum PaymentTypeEnum
-    {
-        CASH = 0,
-        CREDIT_CARD = 1,
-    }
+    CASH = 0,
+    CREDIT_CARD = 1,
 }
