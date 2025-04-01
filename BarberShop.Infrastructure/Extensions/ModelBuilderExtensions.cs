@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BarberShop.Infrastructure.EntityExtensions;
+namespace BarberShop.Infrastructure.Extensions;
 internal static class ModelBuilderExtensions
 {
     internal static string ToSnakeCase(this string text)

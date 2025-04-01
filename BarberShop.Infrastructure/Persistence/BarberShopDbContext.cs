@@ -1,9 +1,9 @@
 ﻿using BarberShop.Domain.Entities;
-using BarberShop.Infrastructure.EntityExtensions;
+using BarberShop.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop.Infrastructure.Persistence;
-public class BarberShopDbContext : DbContext
+internal class BarberShopDbContext : DbContext
 {
     public BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) : base(options) { }
     public DbSet<Billing> Billings { get; set; }

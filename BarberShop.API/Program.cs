@@ -1,7 +1,7 @@
 using BarberShop.API.Filters;
 using BarberShop.API.Middlewares;
-using BarberShop.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+using BarberShop.Application.Extensions;
+using BarberShop.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +13,8 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
-builder.Services.AddDbContext<BarberShopDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
