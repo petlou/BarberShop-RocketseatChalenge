@@ -1,16 +1,39 @@
-﻿using BarberShop.Communication.RequestDTO.Billings;
+﻿using AutoMapper;
+using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
+using BarberShop.Domain.Entities;
+using BarberShop.Domain.Repositories;
+using BarberShop.Domain.Repositories.Billings;
 using BarberShop.Exception.Exceptions;
 
 namespace BarberShop.Application.UseCases.Billings;
 
-public class RegisterNewBilling
+public class RegisterNewBilling : IRegisterNewBilling
 {
-    public ResponseRegisterBillingDTO Execute(RequestRegisterBillingDTO request)
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IBillingsRepository _billingsRepository;
+    private readonly IMapper _mapper;
+
+    public RegisterNewBilling(
+        IUnitOfWork unitOfWork,
+        IBillingsRepository billingsRepository,
+        IMapper mapper)
+    {
+        _unitOfWork = unitOfWork;
+        _billingsRepository = billingsRepository;
+        _mapper = mapper;
+    }
+    public async Task<ResponseRegisterBillingDTO> Execute(RequestRegisterBillingDTO request)
     {
         Validate(request);
 
-        return new ResponseRegisterBillingDTO();
+        var entity = _mapper.Map<Billing>(request);
+
+        await _billingsRepository.Add(entity);
+
+        await _unitOfWork.Commit();
+
+        return _mapper.Map<ResponseRegisterBillingDTO>(entity);
     }
 
     private void Validate(RequestRegisterBillingDTO request)

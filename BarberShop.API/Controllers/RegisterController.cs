@@ -11,9 +11,11 @@ public class RegisterController : BarberShopBaseController
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterBillingDTO), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status400BadRequest)]
-    public IActionResult RegisterBilling([FromBody] RequestRegisterBillingDTO request)
+    public async Task<IActionResult> RegisterBilling(
+        [FromServices] IRegisterNewBilling useCase,
+        [FromBody] RequestRegisterBillingDTO request)
     {
-        var response = new RegisterNewBilling().Execute(request);
+        var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
     }
