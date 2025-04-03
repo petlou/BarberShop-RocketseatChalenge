@@ -1,7 +1,7 @@
 ﻿using System.Net;
 
 namespace BarberShop.Exception.Exceptions;
-internal class NotFoundException : BarberShopBaseException
+public class NotFoundException : BarberShopBaseException
 {
     public override int StatusCode => (int)HttpStatusCode.NotFound;
 

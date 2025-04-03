@@ -1,5 +1,4 @@
 ﻿using BarberShop.Domain.Repositories;
-using BarberShop.Domain.Repositories.Billings;
 using BarberShop.Infrastructure.Persistence;
 using BarberShop.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +22,6 @@ public static class DependencyInjectionExtension
     private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IBillingsRepository, BillingsRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     }
 }

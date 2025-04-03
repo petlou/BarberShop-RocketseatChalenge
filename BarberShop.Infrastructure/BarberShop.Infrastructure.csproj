@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BarberShop.Domain\BarberShop.Domain.csproj" />
+    <ProjectReference Include="..\BarberShop.Exception\BarberShop.Exception.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,24 +3,23 @@ using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Domain.Entities;
 using BarberShop.Domain.Repositories;
-using BarberShop.Domain.Repositories.Billings;
 using BarberShop.Exception.Exceptions;
 
 namespace BarberShop.Application.UseCases.Billings.Register;
 
 public class RegisterNewBilling : IRegisterNewBilling
 {
+    private readonly IGenericRepository<Billing> _repository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IBillingsRepository _billingsRepository;
     private readonly IMapper _mapper;
 
     public RegisterNewBilling(
+        IGenericRepository<Billing> repository,
         IUnitOfWork unitOfWork,
-        IBillingsRepository billingsRepository,
         IMapper mapper)
     {
         _unitOfWork = unitOfWork;
-        _billingsRepository = billingsRepository;
+        _repository = repository;
         _mapper = mapper;
     }
     public async Task<ResponseRegisterBillingDTO> Execute(RequestRegisterBillingDTO request)
@@ -29,7 +28,7 @@ public class RegisterNewBilling : IRegisterNewBilling
 
         var entity = _mapper.Map<Billing>(request);
 
-        await _billingsRepository.Add(entity);
+        await _repository.AddAsync(entity);
 
         await _unitOfWork.Commit();
 
