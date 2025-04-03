@@ -126,6 +126,9 @@
   <data name="PAYMENT_TYPE_INVALID" xml:space="preserve">
     <value>Método de pagamento inválido</value>
   </data>
+  <data name="BILLING_NOT_FOUND" xml:space="preserve">
+    <value>Fatura não encontrada</value>
+  </data>
   <data name="TITLE_REQUIRED" xml:space="preserve">
     <value>Título é obrigatório</value>
   </data>

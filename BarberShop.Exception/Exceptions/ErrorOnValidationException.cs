@@ -1,10 +1,18 @@
-﻿namespace BarberShop.Exception.Exceptions;
+﻿using System.Net;
+
+namespace BarberShop.Exception.Exceptions;
 public class ErrorOnValidationException : BarberShopBaseException
 {
-    public List<string> Errors { get; set; }
+    private readonly List<string> _errors;
+    public override int StatusCode => (int)HttpStatusCode.BadRequest;
 
-    public ErrorOnValidationException(List<string> errorMessages)
+    public ErrorOnValidationException(List<string> errorMessages) : base(string.Empty)
     {
-        Errors = errorMessages;
+        _errors = errorMessages;
+    }
+
+    public override List<string> GetErrors()
+    {
+        return _errors;
     }
 }

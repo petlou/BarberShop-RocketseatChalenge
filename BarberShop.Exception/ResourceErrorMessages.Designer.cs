@@ -70,6 +70,15 @@ namespace BarberShop.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Billing not found.
+        /// </summary>
+        public static string BILLING_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("BILLING_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date must be less than or equal to today.
         /// </summary>
         public static string DATE_MUST_BE_IN_PAST {

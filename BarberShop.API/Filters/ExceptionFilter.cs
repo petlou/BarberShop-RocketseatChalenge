@@ -20,14 +20,11 @@ public class ExceptionFilter : IExceptionFilter
     }
     private void HandleProjectException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnValidationException)
-        {
-            ErrorOnValidationException exception = (ErrorOnValidationException)context.Exception;
-            var errorMessages = new ResponseErrorDTO(exception.Errors);
+        var cashFlowException = (BarberShopBaseException)context.Exception;
+        var errorResponse = new ResponseErrorDTO(cashFlowException.GetErrors());
 
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(errorMessages);
-        }
+        context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;
+        context.Result = new ObjectResult(errorResponse);
     }
     private void ThrowUnknownError(ExceptionContext context)
     {
