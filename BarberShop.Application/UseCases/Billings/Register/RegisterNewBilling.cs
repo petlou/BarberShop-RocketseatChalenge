@@ -6,7 +6,7 @@ using BarberShop.Domain.Repositories;
 using BarberShop.Domain.Repositories.Billings;
 using BarberShop.Exception.Exceptions;
 
-namespace BarberShop.Application.UseCases.Billings;
+namespace BarberShop.Application.UseCases.Billings.Register;
 
 public class RegisterNewBilling : IRegisterNewBilling
 {

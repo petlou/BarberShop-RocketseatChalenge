@@ -1,5 +1,5 @@
 ﻿using BarberShop.Application.AutoMapper;
-using BarberShop.Application.UseCases.Billings;
+using BarberShop.Application.UseCases.Billings.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberShop.Application.Extensions;

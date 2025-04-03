@@ -1,4 +1,4 @@
-﻿using BarberShop.Application.UseCases.Billings;
+﻿using BarberShop.Application.UseCases.Billings.Register;
 using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Errors;
