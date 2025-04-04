@@ -1,5 +1,6 @@
 ﻿using BarberShop.Application.UseCases.Billings.Delete;
 using BarberShop.Application.UseCases.Billings.GetAll;
+using BarberShop.Application.UseCases.Billings.GetOne;
 using BarberShop.Application.UseCases.Billings.Register;
 using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
@@ -33,6 +34,18 @@ public class BillingController : BarberShopBaseController
             return Ok(response);
 
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseBillingDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetOne(
+        [FromServices] IGetOneBilling useCase,
+        [FromRoute] Guid id)
+    {
+        var response = await useCase.Execute(id);
+        return Ok(response);
     }
 
     [HttpDelete]

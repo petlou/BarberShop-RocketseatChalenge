@@ -1,9 +1,9 @@
 ﻿using BarberShop.Communication.Enums;
 
-namespace BarberShop.Communication.RequestDTO.Billings;
-
-public class RequestRegisterBillingDTO
+namespace BarberShop.Communication.ResponseDTO.Billings;
+public class ResponseBillingDTO
 {
+    public Guid Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
     public DateTime Date { get; set; }

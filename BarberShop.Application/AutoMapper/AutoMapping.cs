@@ -21,5 +21,6 @@ public class AutoMapping : Profile
     {
         CreateMap<Billing, ResponseRegisterBillingDTO>();
         CreateMap<Billing, ResponseShortBillingDTO>();
+        CreateMap<Billing, ResponseBillingDTO>();
     }
 }

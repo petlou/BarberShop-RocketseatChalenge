@@ -27,7 +27,7 @@ internal class GenericRepository<T>(BarberShopDbContext dbContext) : IGenericRep
 
     public async Task<T?> GetByIdAsync(Guid id)
     {
-        return await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "id") == id);
+        return await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
     }
 
     public async Task<T?> GetByIdForUpdateAsync(Guid id)
