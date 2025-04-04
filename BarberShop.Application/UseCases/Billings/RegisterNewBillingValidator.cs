@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace BarberShop.Application.UseCases.Billings;
 
-public class RegisterNewBillingValidator : AbstractValidator<RequestRegisterBillingDTO>
+public class RegisterNewBillingValidator : AbstractValidator<RequestRegisterOrUpdateBillingDTO>
 {
     public RegisterNewBillingValidator()
     {

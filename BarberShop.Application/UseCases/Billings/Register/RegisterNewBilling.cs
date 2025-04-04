@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using BarberShop.Application.Utils;
 using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Domain.Entities;
 using BarberShop.Domain.Repositories;
-using BarberShop.Exception.Exceptions;
 
 namespace BarberShop.Application.UseCases.Billings.Register;
 
@@ -18,13 +18,13 @@ public class RegisterNewBilling : IRegisterNewBilling
         IUnitOfWork unitOfWork,
         IMapper mapper)
     {
-        _unitOfWork = unitOfWork;
         _repository = repository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    public async Task<ResponseRegisterBillingDTO> Execute(RequestRegisterBillingDTO request)
+    public async Task<ResponseRegisterBillingDTO> Execute(RequestRegisterOrUpdateBillingDTO request)
     {
-        Validate(request);
+        ValidateBilling.Run(request);
 
         var entity = _mapper.Map<Billing>(request);
 
@@ -33,17 +33,5 @@ public class RegisterNewBilling : IRegisterNewBilling
         await _unitOfWork.Commit();
 
         return _mapper.Map<ResponseRegisterBillingDTO>(entity);
-    }
-
-    private void Validate(RequestRegisterBillingDTO request)
-    {
-        var result = new RegisterNewBillingValidator().Validate(request);
-
-        if(!result.IsValid)
-        {
-            var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
-
-            throw new ErrorOnValidationException(errorMessages);
-        }
     }
 }

@@ -2,6 +2,7 @@
 using BarberShop.Application.UseCases.Billings.GetAll;
 using BarberShop.Application.UseCases.Billings.GetOne;
 using BarberShop.Application.UseCases.Billings.Register;
+using BarberShop.Application.UseCases.Billings.Update;
 using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Errors;
@@ -15,7 +16,7 @@ public class BillingController : BarberShopBaseController
     [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterNewBilling useCase,
-        [FromBody] RequestRegisterBillingDTO request)
+        [FromBody] RequestRegisterOrUpdateBillingDTO request)
     {
         var response = await useCase.Execute(request);
 
@@ -46,6 +47,20 @@ public class BillingController : BarberShopBaseController
     {
         var response = await useCase.Execute(id);
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(
+        [FromRoute] Guid id,
+        [FromServices] IUpdateBilling useCase,
+        [FromBody] RequestRegisterOrUpdateBillingDTO request)
+    {
+        await useCase.Execute(id, request);
+        return NoContent();
     }
 
     [HttpDelete]

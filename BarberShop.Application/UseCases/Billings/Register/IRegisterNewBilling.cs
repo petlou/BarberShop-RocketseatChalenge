@@ -4,5 +4,5 @@ using BarberShop.Communication.ResponseDTO.Billings;
 namespace BarberShop.Application.UseCases.Billings.Register;
 public interface IRegisterNewBilling
 {
-    Task<ResponseRegisterBillingDTO> Execute(RequestRegisterBillingDTO request);
+    Task<ResponseRegisterBillingDTO> Execute(RequestRegisterOrUpdateBillingDTO request);
 }

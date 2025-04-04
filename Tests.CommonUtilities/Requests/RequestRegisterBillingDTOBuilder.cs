@@ -5,11 +5,11 @@ using Bogus;
 namespace Tests.CommonUtilities.Requests;
 public class RequestRegisterBillingDTOBuilder
 {
-    public static RequestRegisterBillingDTO Build()
+    public static RequestRegisterOrUpdateBillingDTO Build()
     {
         var faker = new Faker();
 
-        return new RequestRegisterBillingDTO
+        return new RequestRegisterOrUpdateBillingDTO
         {
             Title = faker.Commerce.ProductName(),
             Description = faker.Commerce.ProductDescription(),

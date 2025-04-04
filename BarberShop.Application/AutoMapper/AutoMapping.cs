@@ -14,7 +14,7 @@ public class AutoMapping : Profile
 
     private void RequestToEntity()
     {
-        CreateMap<RequestRegisterBillingDTO, Billing>();
+        CreateMap<RequestRegisterOrUpdateBillingDTO, Billing>();
     }
 
     private void EntityToResponse()
