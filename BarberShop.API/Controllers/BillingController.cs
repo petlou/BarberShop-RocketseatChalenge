@@ -1,4 +1,5 @@
-﻿using BarberShop.Application.UseCases.Billings.Register;
+﻿using BarberShop.Application.UseCases.Billings.Delete;
+using BarberShop.Application.UseCases.Billings.Register;
 using BarberShop.Communication.RequestDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Billings;
 using BarberShop.Communication.ResponseDTO.Errors;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop.API.Controllers;
 
-public class RegisterController : BarberShopBaseController
+public class BillingController : BarberShopBaseController
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterBillingDTO), StatusCodes.Status201Created)]
@@ -18,5 +19,18 @@ public class RegisterController : BarberShopBaseController
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorDTO), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(
+        [FromServices] IDeleteBilling useCase,
+        [FromRoute] Guid id)
+    {
+        await useCase.Execute(id);
+
+        return NoContent();
     }
 }
