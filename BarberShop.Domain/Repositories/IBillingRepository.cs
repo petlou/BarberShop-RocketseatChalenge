@@ -3,5 +3,5 @@
 namespace BarberShop.Domain.Repositories;
 public interface IBillingRepository : IGenericRepository<Billing>
 {
-    Task<List<Billing>> FilterByMonth(DateOnly date);
+    Task<List<Billing>> FilterByMonth(DateTime startDate, DateTime endDate);
 }

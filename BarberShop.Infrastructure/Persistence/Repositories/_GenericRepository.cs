@@ -4,7 +4,7 @@ using BarberShop.Exception.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop.Infrastructure.Persistence.Repositories;
-internal class _GenericRepository<T>(BarberShopDbContext dbContext) : IGenericRepository<T> where T : class
+internal class GenericRepository<T>(BarberShopDbContext dbContext) : IGenericRepository<T> where T : class
 {
     protected readonly BarberShopDbContext _dbContext = dbContext;
     protected readonly DbSet<T> _dbSet = dbContext.Set<T>();
