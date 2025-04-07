@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BarberShop.Communication.ResponseDTO.Billings;
-using BarberShop.Domain.Entities;
 using BarberShop.Domain.Repositories;
 using BarberShop.Exception;
 using BarberShop.Exception.Exceptions;
@@ -8,11 +7,11 @@ using BarberShop.Exception.Exceptions;
 namespace BarberShop.Application.UseCases.Billings.GetOne;
 public class GetOneBilling : IGetOneBilling
 {
-    private readonly IGenericRepository<Billing> _repository;
+    private readonly IBillingRepository _repository;
     private readonly IMapper _mapper;
 
     public GetOneBilling(
-        IGenericRepository<Billing> repository,
+        IBillingRepository repository,
         IMapper mapper)
     {
         _repository = repository;

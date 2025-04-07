@@ -1,14 +1,13 @@
-﻿using BarberShop.Domain.Entities;
-using BarberShop.Domain.Repositories;
+﻿using BarberShop.Domain.Repositories;
 
 namespace BarberShop.Application.UseCases.Billings.Delete;
 public class DeleteBilling : IDeleteBilling
 {
-    private readonly IGenericRepository<Billing> _repository;
+    private readonly IBillingRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
 
     public DeleteBilling(
-        IGenericRepository<Billing> repository,
+        IBillingRepository repository,
         IUnitOfWork unitOfWork)
     {
         _repository = repository;

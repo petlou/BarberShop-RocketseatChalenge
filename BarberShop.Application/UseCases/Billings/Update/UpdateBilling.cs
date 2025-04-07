@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Utils;
 using BarberShop.Communication.RequestDTO.Billings;
-using BarberShop.Domain.Entities;
 using BarberShop.Domain.Repositories;
 using BarberShop.Exception;
 using BarberShop.Exception.Exceptions;
@@ -11,10 +10,10 @@ public class UpdateBilling : IUpdateBilling
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IGenericRepository<Billing> _repository;
+    private readonly IBillingRepository _repository;
 
     public UpdateBilling(
-        IGenericRepository<Billing> repository,
+        IBillingRepository repository,
         IUnitOfWork unitOfWork,
         IMapper mapper)
     {

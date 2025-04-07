@@ -9,12 +9,12 @@ namespace BarberShop.Application.UseCases.Billings.Register;
 
 public class RegisterNewBilling : IRegisterNewBilling
 {
-    private readonly IGenericRepository<Billing> _repository;
+    private readonly IBillingRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
     public RegisterNewBilling(
-        IGenericRepository<Billing> repository,
+        IBillingRepository repository,
         IUnitOfWork unitOfWork,
         IMapper mapper)
     {
