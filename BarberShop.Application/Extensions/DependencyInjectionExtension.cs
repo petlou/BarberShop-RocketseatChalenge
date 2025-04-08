@@ -5,6 +5,7 @@ using BarberShop.Application.UseCases.Billings.GetOne;
 using BarberShop.Application.UseCases.Billings.Register;
 using BarberShop.Application.UseCases.Billings.Update;
 using BarberShop.Application.UseCases.Reports.Excel;
+using BarberShop.Application.UseCases.Reports.Pdf;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberShop.Application.Extensions;
@@ -30,5 +31,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IDeleteBilling, DeleteBilling>();
 
         services.AddScoped<IGenerateBillingReportExcel, GenerateBillingReportExcel>();
+        services.AddScoped<IGenerateBillingReportPdf, GenerateBillingReportPdf>();
     }
 }

@@ -23,7 +23,7 @@ public class GenerateBillingReportExcel : IGenerateBillingReportExcel
         var daysInMonth = DateTime.DaysInMonth(year: date.Year, month: date.Month);
         var endDate = new DateTime(year: date.Year, month: date.Month, day: daysInMonth, hour: 23, minute: 59, second: 59,DateTimeKind.Utc);
 
-        var billings = await _repository.FilterByMonth(startDate.ToUniversalTime(), endDate.ToUniversalTime());
+        var billings = await _repository.FilterByMonth(startDate, endDate);
 
         if (billings.Count == 0)
         {
