@@ -61,6 +61,33 @@ namespace BarberShop.Domain.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string AMOUNT {
+            get {
+                return ResourceManager.GetString("AMOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Billing Report.
+        /// </summary>
+        public static string BILLING_REPORT {
+            get {
+                return ResourceManager.GetString("BILLING_REPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Billings for.
+        /// </summary>
+        public static string BILLINGS_FOR {
+            get {
+                return ResourceManager.GetString("BILLINGS_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash.
         /// </summary>
         public static string CASH {
@@ -115,11 +142,11 @@ namespace BarberShop.Domain.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value.
+        ///   Looks up a localized string similar to Total billed in {0}.
         /// </summary>
-        public static string VALUE {
+        public static string TOTAL_BILLED_IN {
             get {
-                return ResourceManager.GetString("VALUE", resourceCulture);
+                return ResourceManager.GetString("TOTAL_BILLED_IN", resourceCulture);
             }
         }
     }

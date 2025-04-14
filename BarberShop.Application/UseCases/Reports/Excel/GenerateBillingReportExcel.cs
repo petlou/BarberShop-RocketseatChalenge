@@ -1,6 +1,8 @@
 ﻿
 
-using BarberShop.Domain.Enums;
+using BarberShop.Application.Utils;
+using BarberShop.Domain.Entities;
+using BarberShop.Domain.Extensions;
 using BarberShop.Domain.Reports;
 using BarberShop.Domain.Repositories;
 using ClosedXML.Excel;
@@ -18,21 +20,15 @@ public class GenerateBillingReportExcel : IGenerateBillingReportExcel
 
     public async Task<byte[]> Execute(DateOnly date)
     {
-        var startDate = new DateTime(year: date.Year, month: date.Month, day: 1, hour: 0, minute: 0, second: 0, DateTimeKind.Utc);
-
-        var daysInMonth = DateTime.DaysInMonth(year: date.Year, month: date.Month);
-        var endDate = new DateTime(year: date.Year, month: date.Month, day: daysInMonth, hour: 23, minute: 59, second: 59,DateTimeKind.Utc);
-
+        var (startDate, endDate) = GetMonthRange.Run(date);
         var billings = await _repository.FilterByMonth(startDate, endDate);
 
         if (billings.Count == 0)
-        {
             return [];
-        }
 
         using var workBook = new XLWorkbook();
 
-        workBook.Author = "Peter Lourenço";
+        workBook.Author = "BarberShop APP";
         workBook.Style.Font.FontSize = 12;
         workBook.Style.Font.FontName = "Calibri";
 
@@ -40,35 +36,17 @@ public class GenerateBillingReportExcel : IGenerateBillingReportExcel
 
         InsertHeader(workSheet);
 
-        var raw = 2;
+        var row = 2;
         foreach (var billing in billings)
         {
-            workSheet.Cell($"A{raw}").Value = billing.Title;
-            workSheet.Cell($"B{raw}").Value = billing.Date;
-            workSheet.Cell($"C{raw}").Value = ConvertPaymentType(billing.PaymentType);
-
-            workSheet.Cell($"D{raw}").Value = billing.Amount;
-            workSheet.Cell($"D{raw}").Style.NumberFormat.Format = $"-{CURRENCY_SYMBOL} #,##0.00";
-
-            workSheet.Cell($"E{raw}").Value = billing.Description;
-
-            raw++;
+            AddRows(workSheet, billing, row);
+            row++;
         }
 
         var file = new MemoryStream();
         workBook.SaveAs(file);
 
         return file.ToArray();
-    }
-
-    private string ConvertPaymentType(PaymentTypeEnum payment)
-    {
-        return payment switch
-        {
-            PaymentTypeEnum.CASH => ResourceReportMessages.CASH,
-            PaymentTypeEnum.CREDIT_CARD => ResourceReportMessages.CREDIT_CARD,
-            _ => string.Empty
-        };
     }
 
     private void InsertHeader(IXLWorksheet workSheet)
@@ -85,7 +63,7 @@ public class GenerateBillingReportExcel : IGenerateBillingReportExcel
         workSheet.Cell("A1").Value = ResourceReportMessages.TITLE;
         workSheet.Cell("B1").Value = ResourceReportMessages.DATE;
         workSheet.Cell("C1").Value = ResourceReportMessages.PAYMENT_TYPE;
-        workSheet.Cell("D1").Value = ResourceReportMessages.VALUE;
+        workSheet.Cell("D1").Value = ResourceReportMessages.AMOUNT;
         workSheet.Cell("E1").Value = ResourceReportMessages.DESCRIPTION;
 
         workSheet.Cells("A1:E1").Style.Font.Bold = true;
@@ -98,5 +76,17 @@ public class GenerateBillingReportExcel : IGenerateBillingReportExcel
         workSheet.Cell("C1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         workSheet.Cell("D1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         workSheet.Cell("E1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+    }
+
+    private void AddRows(IXLWorksheet workSheet, Billing billing, int row)
+    {
+        workSheet.Cell($"A{row}").Value = billing.Title;
+        workSheet.Cell($"B{row}").Value = billing.Date;
+        workSheet.Cell($"C{row}").Value = billing.PaymentType.PaymentTypeEnumToString();
+
+        workSheet.Cell($"D{row}").Value = billing.Amount;
+        workSheet.Cell($"D{row}").Style.NumberFormat.Format = $"{CURRENCY_SYMBOL} #,##0.00";
+
+        workSheet.Cell($"E{row}").Value = billing.Description;
     }
 }
