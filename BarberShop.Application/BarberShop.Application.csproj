@@ -23,12 +23,23 @@
     <PackageReference Include="ClosedXML" Version="0.104.2" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BarberShop.Communication\BarberShop.Communication.csproj" />
     <ProjectReference Include="..\BarberShop.Domain\BarberShop.Domain.csproj" />
     <ProjectReference Include="..\BarberShop.Exception\BarberShop.Exception.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
