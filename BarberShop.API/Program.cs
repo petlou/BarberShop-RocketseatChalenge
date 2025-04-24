@@ -2,6 +2,7 @@ using BarberShop.API.Filters;
 using BarberShop.API.Middlewares;
 using BarberShop.Application.Extensions;
 using BarberShop.Infrastructure.Extensions;
+using BarberShop.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,4 +33,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await MigrateDatabase();
+
 app.Run();
+
+async Task MigrateDatabase()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+
+    await DatabaseMigration.MigrateDatabase(scope.ServiceProvider);
+}

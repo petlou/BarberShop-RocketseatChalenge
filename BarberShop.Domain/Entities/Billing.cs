@@ -26,4 +26,10 @@ public class Billing
 
     [Required]
     public PaymentTypeEnum PaymentType { get; set; }
+
+    [Required]
+    public Guid UserId { get; set; }
+
+    [ForeignKey("UserId")]
+    public User User { get; set; } = default!;
 }
